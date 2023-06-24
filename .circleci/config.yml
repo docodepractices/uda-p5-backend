@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+   aws-cli: circleci/aws-cli@4.0.0
+   serverless: circleci/serverless-framework@2.0.1
+jobs:
+   deploy:
+     docker:
+      - image: cimg/node:14.21.3
+     steps:
+       - checkout
+       - aws-cli/setup
+        # run Install
+       - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            node --version
+            sudo npm i -g serverless
+            npm update
+            npm install
+       # run deploy
+       - run: serverless deploy --verbose
+workflows:
+  app_deploy:
+    jobs:
+      - deploy:
+          context:
+            - "sls-context"
