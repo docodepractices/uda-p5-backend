@@ -16,7 +16,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: ${opt:stage, 'dev'}
+  stage: ${opt:stage, 'stage'}
   region: ${opt:region, 'us-east-1'}
 
   tracing:
